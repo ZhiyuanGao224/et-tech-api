@@ -7,11 +7,7 @@ dotenv.config();
 
 const app = express();
 
-// ✅ 添加跨域配置：允许你的前端网页访问这个 API
-app.use(cors({
-  origin: "*", // 你也可以改成 GitHub Pages 地址，比如：https://zhiyuangao224.github.io
-}));
-
+app.use(cors({ origin: "*" }));
 app.use(express.json());
 
 const PORT = process.env.PORT || 4000;
@@ -30,11 +26,12 @@ app.post("/deepseek", async (req, res) => {
     const data = await response.json();
     res.json(data);
   } catch (error) {
-    console.error("Error:", error);
+    console.error("❌ Error:", error);
     res.status(500).json({ error: "Failed to fetch from DeepSeek" });
   }
 });
 
 app.listen(PORT, () => {
-  console.log(`✅ Proxy server running at http://localhost:${PORT}`);
+  console.log(`✅ Server running on http://localhost:${PORT}`);
 });
+
